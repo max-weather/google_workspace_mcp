@@ -42,6 +42,8 @@ def _load_startup_dependencies():
         set_disabled_tools,
         wrap_server_tool_method,
         filter_server_tools,
+        resolve_always_load_tools,
+        mark_always_load_tools,
     )
 
     return (
@@ -64,6 +66,8 @@ def _load_startup_dependencies():
         set_disabled_tools,
         wrap_server_tool_method,
         filter_server_tools,
+        resolve_always_load_tools,
+        mark_always_load_tools,
     )
 
 
@@ -90,6 +94,8 @@ load_dotenv(dotenv_path=dotenv_path)
     set_disabled_tools,
     wrap_server_tool_method,
     filter_server_tools,
+    resolve_always_load_tools,
+    mark_always_load_tools,
 ) = _load_startup_dependencies()
 
 # Suppress googleapiclient discovery cache warning
@@ -782,6 +788,7 @@ def main():
 
     # Filter tools based on tier configuration (if tier-based loading is enabled)
     tools_removed = filter_server_tools(server)
+    mark_always_load_tools(server, resolve_always_load_tools())
 
     ui.section("Services")
     ui.grid([(SERVICE_ICONS.get(t, "🔧"), t.title()) for t in loaded])
