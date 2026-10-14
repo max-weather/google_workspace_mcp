@@ -59,6 +59,8 @@ def test_listed_tool_is_marked_through_the_entrypoint(tmp_path, script):
     env = {
         **os.environ,
         "WORKSPACE_MCP_ALWAYS_LOAD_TOOLS": "Search_Gmail_Messages",
+        # An inherited block list would filter the listed tool out.
+        "WORKSPACE_MCP_DISABLED_TOOLS": "",
         "GOOGLE_OAUTH_CLIENT_ID": "test-client-id",
         "GOOGLE_OAUTH_CLIENT_SECRET": "test-client-secret",
         "MCP_ENABLE_OAUTH21": "false",
